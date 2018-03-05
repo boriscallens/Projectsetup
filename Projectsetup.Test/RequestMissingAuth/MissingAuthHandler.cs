@@ -8,11 +8,8 @@ namespace Projectsetup.Test.RequestMissingAuth
     {
         public Task<MissingAuthResult> Handle(MissingAuthRequest request, CancellationToken cancellationToken)
         {
-            var missingAuthResult = new MissingAuthResult
-            {
-                AuthenticationResult = request.AuthenticationResult
-            };
-
+            var missingAuthResult = new MissingAuthResult(request);
+            
             return Task.FromResult(missingAuthResult);
         }
     }

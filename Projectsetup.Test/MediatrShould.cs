@@ -47,7 +47,7 @@ namespace Projectsetup.Test
         {
             var request = new MissingAuthRequest();
             var exception = Assert.ThrowsAsync<NotImplementedException>(async () => await _mediatr.Send(request));
-            Assert.Contains(exception.Result.Message, "MissingAuthRequestAuthenticator");
+            Assert.Contains("IAuthentictionHandler<MissingAuthRequest>", exception.Result.Message);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using Projectsetup.Domain.Authentication;
+﻿using Projectsetup.Domain.Pipeline;
 
 namespace Projectsetup.Test.RequestMissingAuth {
-    public class MissingAuthResult {
-        public AuthenticationResult AuthenticationResult { get; set; }
+    public class MissingAuthResult: PipelineResult {
+        public MissingAuthResult(MissingAuthRequest request) : base(request)
+        { }
     }
 }

@@ -8,11 +8,7 @@ namespace Projectsetup.Domain.Ping
     {
         public Task<PingResult> Handle(PingRequest request, CancellationToken cancellationToken)
         {
-            var pingResult = new PingResult
-            {
-                AuthenticationResult = request.AuthenticationResult
-            };
-
+            var pingResult = new PingResult(request);
             return Task.FromResult(pingResult);
         }
     }
