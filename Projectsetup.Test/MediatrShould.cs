@@ -14,7 +14,13 @@ namespace Projectsetup.Test
 
         public MediatrShould()
         {
-            var container = AutofacConfig.GetBuilder().Build();
+            var testMarkerType = typeof(MissingAuthHandler);
+            var mediatrModule = new MediatrModule(testMarkerType);
+
+            var builder = AutofacConfig.GetBuilder();
+            builder.RegisterModule(mediatrModule);
+            var container = builder.Build();
+
             _mediatr = container.Resolve<IMediator>();
         }
 
@@ -44,6 +50,4 @@ namespace Projectsetup.Test
             Assert.Contains(exception.Result.Message, "MissingAuthRequestAuthenticator");
         }
     }
-
-    public class UnauthenticatablePingRequest : IRequest { }
 }

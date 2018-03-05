@@ -15,13 +15,13 @@ namespace Projectsetup.Infrastructure
     {
         public static ContainerBuilder GetBuilder()
         {
-            var builder = new ContainerBuilder();
-
             var domainMarkerType = typeof(PingRequest);
+            var mediatrModule = new MediatrModule(domainMarkerType);
 
+            var builder = new ContainerBuilder();
+            builder.RegisterModule(mediatrModule);
             RegisterDomain(builder, domainMarkerType);
-            RegisterMediatr(builder, domainMarkerType);
-
+            
             return builder;
         }
 
