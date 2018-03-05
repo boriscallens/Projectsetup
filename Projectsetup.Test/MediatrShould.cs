@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using Autofac;
 using MediatR;
-using Projectsetup.Domain.Authentication;
 using Projectsetup.Domain.Ping;
 using Projectsetup.Infrastructure;
 using Projectsetup.Test.RequestMissingAuth;
@@ -16,8 +14,7 @@ namespace Projectsetup.Test
 
         public MediatrShould()
         {
-            var container = AutofacConfig.GetBuilder();
-            container.Build();
+            var container = AutofacConfig.GetBuilder().Build();
             _mediatr = container.Resolve<IMediator>();
         }
 
