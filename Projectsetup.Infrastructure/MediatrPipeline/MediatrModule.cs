@@ -4,9 +4,9 @@ using System.Linq;
 using Autofac;
 using MediatR;
 using MediatR.Pipeline;
-using Projectsetup.Domain.Authentication;
+using Projectsetup.Domain.Pipeline;
 
-namespace Projectsetup.Infrastructure
+namespace Projectsetup.Infrastructure.MediatrPipeline
 {
     public class MediatrModule : Module
     {
@@ -28,7 +28,7 @@ namespace Projectsetup.Infrastructure
                 typeof(IRequestHandler<,>),
                 typeof(IRequestHandler<>),
                 typeof(INotificationHandler<>),
-                typeof(IAuthenticationHandler<>)
+                typeof(IPipelineAuthenticationHandler<>)
             };
             var assemblies = MarkerTypes.Select(type => type.Assembly).Distinct().ToArray();
 

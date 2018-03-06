@@ -3,6 +3,7 @@ using Autofac;
 using MediatR;
 using Projectsetup.Domain.Ping;
 using Projectsetup.Infrastructure;
+using Projectsetup.Infrastructure.MediatrPipeline;
 using Projectsetup.Test.RequestMissingAuth;
 using Xunit;
 
@@ -47,7 +48,7 @@ namespace Projectsetup.Test
         {
             var request = new MissingAuthRequest();
             var exception = Assert.ThrowsAsync<NotImplementedException>(async () => await _mediatr.Send(request));
-            Assert.Contains("IAuthentictionHandler<MissingAuthRequest>", exception.Result.Message);
+            Assert.Contains("IPipelineAuthenticationHandler<MissingAuthRequest>", exception.Result.Message);
         }
     }
 }

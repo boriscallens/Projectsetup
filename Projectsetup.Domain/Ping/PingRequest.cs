@@ -1,10 +1,6 @@
-﻿using Projectsetup.Domain.Authentication;
+﻿using Projectsetup.Domain.Pipeline;
 
 namespace Projectsetup.Domain.Ping
 {
-    public class PingRequest : IAuthenticatableRequest<PingResult>
-    {
-        public IUser User { get; set; }
-        public AuthenticationResult AuthenticationResult { get; set; }
-    }
+    public class PingRequest : BasePipelineRequest<PingResponse> { }
 }

@@ -1,14 +1,14 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
+using Projectsetup.Domain.Pipeline;
 
 namespace Projectsetup.Domain.Ping
 {
-    public class PingHandler : IRequestHandler<PingRequest, PingResult>
+    public class PingHandler : IPipelineHandler<PingRequest, PingResponse>
     {
-        public Task<PingResult> Handle(PingRequest request, CancellationToken cancellationToken)
+        public Task<PingResponse> Handle(PingRequest request, CancellationToken cancellationToken)
         {
-            var pingResult = new PingResult(request);
+            var pingResult = new PingResponse(request);
             return Task.FromResult(pingResult);
         }
     }

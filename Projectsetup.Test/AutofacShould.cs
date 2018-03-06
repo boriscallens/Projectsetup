@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Projectsetup.Domain.Authentication;
 using Projectsetup.Domain.Ping;
+using Projectsetup.Domain.Pipeline;
 using Projectsetup.Infrastructure;
 using Xunit;
 
@@ -18,7 +19,7 @@ namespace Projectsetup.Test
         [Fact]
         public void ResolveAuthenticators()
         {
-            var pingAuthenticator = _container.Resolve<IAuthenticationHandler<PingRequest>>();
+            var pingAuthenticator = _container.Resolve<IPipelineAuthenticationHandler<PingRequest>>();
             Assert.IsType<PingAuthenticator>(pingAuthenticator);
         }
     }

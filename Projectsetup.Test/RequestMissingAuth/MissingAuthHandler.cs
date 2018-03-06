@@ -4,11 +4,11 @@ using MediatR;
 
 namespace Projectsetup.Test.RequestMissingAuth
 {
-    public class MissingAuthHandler : IRequestHandler<MissingAuthRequest, MissingAuthResult>
+    public class MissingAuthHandler : IRequestHandler<MissingAuthRequest, MissingAuthResponse>
     {
-        public Task<MissingAuthResult> Handle(MissingAuthRequest request, CancellationToken cancellationToken)
+        public Task<MissingAuthResponse> Handle(MissingAuthRequest request, CancellationToken cancellationToken)
         {
-            var missingAuthResult = new MissingAuthResult(request);
+            var missingAuthResult = new MissingAuthResponse(request);
             
             return Task.FromResult(missingAuthResult);
         }

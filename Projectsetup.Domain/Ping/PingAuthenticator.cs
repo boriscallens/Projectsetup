@@ -1,10 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using Projectsetup.Domain.Authentication;
+using Projectsetup.Domain.Pipeline;
 
 namespace Projectsetup.Domain.Ping
 {
-    public class PingAuthenticator : IAuthenticationHandler<PingRequest>
+    public class PingAuthenticator : IPipelineAuthenticationHandler<PingRequest>
     {
         private readonly IAuthenticator _authenticator;
 
