@@ -1,9 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Autofac;
 using MediatR;
-using Projectsetup.Domain.Ping;
+using NSubstitute;
+using Projectsetup.Domain.Logging;
+using Projectsetup.Domain.Pipeline;
+using Projectsetup.Domain.Usecases.Ping;
 using Projectsetup.Infrastructure;
-using Projectsetup.Infrastructure.MediatrPipeline;
+using Projectsetup.Infrastructure.Logging;
+using Projectsetup.Infrastructure.Pipeline;
 using Projectsetup.Test.RequestMissingAuth;
 using Xunit;
 
@@ -12,14 +17,21 @@ namespace Projectsetup.Test
     public class MediatrShould
     {
         private readonly IMediator _mediatr;
+        private readonly ILogger _logger;
 
         public MediatrShould()
         {
             var testMarkerType = typeof(MissingAuthHandler);
+            _logger = Substitute.For<ILogger>();
+
             var mediatrModule = new MediatrModule(testMarkerType);
+            var log4NetModule = new Log4NetModule();
 
             var builder = AutofacConfig.GetBuilder();
             builder.RegisterModule(mediatrModule);
+            builder.RegisterModule(log4NetModule);
+            builder.RegisterInstance(_logger).As<ILogger>();
+
             var container = builder.Build();
 
             _mediatr = container.Resolve<IMediator>();
@@ -49,6 +61,24 @@ namespace Projectsetup.Test
             var request = new MissingAuthRequest();
             var exception = Assert.ThrowsAsync<NotImplementedException>(async () => await _mediatr.Send(request));
             Assert.Contains("IPipelineAuthenticationHandler<MissingAuthRequest>", exception.Result.Message);
+        }
+
+        [Fact]
+        public async Task LogIncommingRequests()
+        {
+            var request = new PingRequest();
+            await _mediatr.Send(request);
+
+            _logger.ReceivedWithAnyArgs().Info(null);
+        }
+
+        [Fact]
+        public async Task LogWithCorrelationId()
+        {
+            var request = new PingRequest();
+            await _mediatr.Send(request);
+
+            _logger.Received().Info(Arg.Is<IPipelineRequest<IPipelineResponse>>(x => x.CorrelationId != null));
         }
     }
 }

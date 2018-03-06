@@ -6,7 +6,7 @@ using MediatR;
 using MediatR.Pipeline;
 using Projectsetup.Domain.Pipeline;
 
-namespace Projectsetup.Infrastructure.MediatrPipeline
+namespace Projectsetup.Infrastructure.Pipeline
 {
     public class MediatrModule : Module
     {
@@ -41,6 +41,7 @@ namespace Projectsetup.Infrastructure.MediatrPipeline
             }
 
             // It appears Autofac returns the last registered types first
+            builder.RegisterGeneric(typeof(RequestLogger<>)).As(typeof(IRequestPreProcessor<>));
             builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
             builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
             //builder.RegisterGeneric(typeof(GenericRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));

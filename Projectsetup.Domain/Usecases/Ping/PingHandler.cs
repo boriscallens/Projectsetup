@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Projectsetup.Domain.Pipeline;
 
-namespace Projectsetup.Domain.Ping
+namespace Projectsetup.Domain.Usecases.Ping
 {
     public class PingHandler : IPipelineHandler<PingRequest, PingResponse>
     {

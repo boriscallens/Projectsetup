@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Projectsetup.Domain.Pipeline;
 
-namespace Projectsetup.Infrastructure.MediatrPipeline
+namespace Projectsetup.Infrastructure.Pipeline
 {
     public class MediatrPipeline : IPipeline
     {

@@ -1,4 +1,5 @@
-﻿using Projectsetup.Domain.Authentication;
+﻿using System;
+using Projectsetup.Domain.Authentication;
 
 namespace Projectsetup.Domain.Pipeline
 {
@@ -6,6 +7,8 @@ namespace Projectsetup.Domain.Pipeline
         : MediatR.IRequest<TResponse>
         where TResponse : IPipelineResponse
     {
+        Guid CorrelationId { get; }
+        IUser User { get; set; }
         AuthenticationResult AuthenticationResult { get; set; }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Reflection;
 using Autofac;
-using Projectsetup.Domain.Ping;
-using Projectsetup.Infrastructure.MediatrPipeline;
+using Projectsetup.Domain.Usecases.Ping;
+using Projectsetup.Infrastructure.Logging;
+using Projectsetup.Infrastructure.Pipeline;
 
 namespace Projectsetup.Infrastructure
 {
@@ -12,9 +13,11 @@ namespace Projectsetup.Infrastructure
         {
             var domainMarkerType = typeof(PingRequest);
             var mediatrModule = new MediatrModule(domainMarkerType);
+            var loggingModule = new Log4NetModule();
 
             var builder = new ContainerBuilder();
             builder.RegisterModule(mediatrModule);
+            builder.RegisterModule(loggingModule);
             RegisterDomain(builder, domainMarkerType);
 
             return builder;
@@ -25,4 +28,5 @@ namespace Projectsetup.Infrastructure
             builder.RegisterAssemblyTypes(markerType.GetTypeInfo().Assembly).AsImplementedInterfaces();
         }
     }
+
 }

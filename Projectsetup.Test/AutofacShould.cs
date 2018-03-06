@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Projectsetup.Domain.Authentication;
-using Projectsetup.Domain.Ping;
 using Projectsetup.Domain.Pipeline;
+using Projectsetup.Domain.Usecases.Ping;
 using Projectsetup.Infrastructure;
 using Xunit;
 
