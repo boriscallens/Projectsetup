@@ -10,6 +10,7 @@ using Projectsetup.Infrastructure;
 using Projectsetup.Infrastructure.Logging;
 using Projectsetup.Infrastructure.Pipeline;
 using Projectsetup.Test.RequestMissingAuth;
+using Projectsetup.Test.RequestMissingValidation;
 using Xunit;
 
 namespace Projectsetup.Test
@@ -21,10 +22,11 @@ namespace Projectsetup.Test
 
         public MediatrShould()
         {
-            var testMarkerType = typeof(MissingAuthHandler);
+            var missingAuthType = typeof(MissingAuthHandler);
+            var missingValType = typeof(MissingValidationHandler);
             _logger = Substitute.For<ILogger>();
 
-            var mediatrModule = new MediatrModule(testMarkerType);
+            var mediatrModule = new MediatrModule(missingAuthType, missingValType);
             var log4NetModule = new Log4NetModule();
 
             var builder = AutofacConfig.GetBuilder();
@@ -54,6 +56,15 @@ namespace Projectsetup.Test
 
             Assert.NotNull(result.AuthenticationResult);
         }
+        
+        [Fact]
+        public async void FindValidatorForRequest()
+        {
+            var request = new PingRequest();
+            var result = await _mediatr.Send(request);
+
+            Assert.NotNull(result.ValidationResult);
+        }
 
         [Fact]
         public void ThrowIfNoAuthenticatorIsFound()
@@ -61,6 +72,14 @@ namespace Projectsetup.Test
             var request = new MissingAuthRequest();
             var exception = Assert.ThrowsAsync<NotImplementedException>(async () => await _mediatr.Send(request));
             Assert.Contains("IPipelineAuthenticationHandler<MissingAuthRequest>", exception.Result.Message);
+        }
+
+        [Fact]
+        public void ThrowIfNoValidationIsFound()
+        {
+            var request = new MissingValidationRequest();
+            var exception = Assert.ThrowsAsync<NotImplementedException>(async () => await _mediatr.Send(request));
+            Assert.Contains("IPipelineValidationHandler<MissingValidationRequest>", exception.Result.Message);
         }
 
         [Fact]

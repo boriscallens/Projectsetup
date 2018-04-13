@@ -1,3 +1,3 @@
-﻿namespace Projectsetup.Domain.Authentication {
+﻿namespace Projectsetup.Domain.Services.Authentication {
     public class AuthenticationResult { }
 }

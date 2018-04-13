@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using Projectsetup.Domain.Authentication;
 using Projectsetup.Domain.Pipeline;
+using Projectsetup.Domain.Services.Authentication;
 
 namespace Projectsetup.Domain.Usecases.Ping
 {

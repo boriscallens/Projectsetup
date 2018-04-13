@@ -1,5 +1,7 @@
 ﻿using System;
 using Projectsetup.Domain.Authentication;
+using Projectsetup.Domain.Services.Authentication;
+using Projectsetup.Domain.Services.Validation;
 
 namespace Projectsetup.Domain.Pipeline
 {
@@ -9,6 +11,7 @@ namespace Projectsetup.Domain.Pipeline
         public Guid CorrelationId { get; }
         public IUser User { get; set; }
         public AuthenticationResult AuthenticationResult { get; set; }
+        public ValidationResult ValidationResult { get; set; }
 
         public BasePipelineRequest(Guid correlationId)
         {

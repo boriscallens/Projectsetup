@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Projectsetup.Domain.Authentication;
 using Projectsetup.Domain.Pipeline;
 using Projectsetup.Domain.Usecases.Ping;
 using Projectsetup.Infrastructure;
