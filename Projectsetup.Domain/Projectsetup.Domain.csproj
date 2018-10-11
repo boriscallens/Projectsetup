@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <Reference Include="MediatR">
-      <HintPath>..\..\..\Users\callensb01\.nuget\packages\mediatr\4.0.1\lib\netstandard1.1\MediatR.dll</HintPath>
+      <HintPath>..\..\..\..\Users\callensb01\.nuget\packages\mediatr\4.1.0\lib\netstandard2.0\MediatR.dll</HintPath>
     </Reference>
   </ItemGroup>
 

@@ -49,18 +49,11 @@ namespace Projectsetup.Infrastructure.Pipeline
             //builder.RegisterGeneric(typeof(ConstrainedRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
             //builder.RegisterGeneric(typeof(ConstrainedPingedHandler<>)).As(typeof(INotificationHandler<>));
 
-            builder.Register<SingleInstanceFactory>(
+            builder.Register<ServiceFactory>(
                 ctx =>
                 {
                     var c = ctx.Resolve<IComponentContext>();
                     return t => c.Resolve(t);
-                });
-
-            builder.Register<MultiInstanceFactory>(
-                ctx =>
-                {
-                    var c = ctx.Resolve<IComponentContext>();
-                    return t => (IEnumerable<object>) c.Resolve(typeof(IEnumerable<>).MakeGenericType(t));
                 });
         }
     }

@@ -23,10 +23,10 @@ namespace Projectsetup.Test
         public MediatrShould()
         {
             var missingAuthType = typeof(MissingAuthHandler);
-            var missingValType = typeof(MissingValidationHandler);
+            var missingValidationType = typeof(MissingValidationHandler);
             _logger = Substitute.For<ILogger>();
 
-            var mediatrModule = new MediatrModule(missingAuthType, missingValType);
+            var mediatrModule = new MediatrModule(missingAuthType, missingValidationType);
             var log4NetModule = new Log4NetModule();
 
             var builder = AutofacConfig.GetBuilder();
@@ -83,7 +83,7 @@ namespace Projectsetup.Test
         }
 
         [Fact]
-        public async Task LogIncommingRequests()
+        public async Task LogIncomingRequests()
         {
             var request = new PingRequest();
             await _mediatr.Send(request);
@@ -97,7 +97,7 @@ namespace Projectsetup.Test
             var request = new PingRequest();
             await _mediatr.Send(request);
 
-            _logger.Received().Info(Arg.Is<IPipelineRequest<IPipelineResponse>>(x => x.CorrelationId != null));
+            _logger.Received().Info(Arg.Is<IPipelineRequest<IPipelineResponse>>(x => x.CorrelationId == request.CorrelationId));
         }
     }
 }

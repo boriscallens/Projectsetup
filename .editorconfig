@@ -60,7 +60,7 @@ dotnet_naming_rule.methods_must_be_pascal_case.severity = error
 # parameter selector is currently bugged in visual studio
 dotnet_naming_symbols.all_parameters.applicable_kinds = parameter
 dotnet_naming_symbols.all_parameters.applicable_accessibilities = *
-dotnet_naming_style.camel_case_style.capitalization = all_upper
+dotnet_naming_style.camel_case_style.capitalization = camel_case_style
 
 dotnet_naming_rule.parameters_must_be_camel_case.symbols = all_parameters
 dotnet_naming_rule.parameters_must_be_camel_case.style = camel_case_style
@@ -73,6 +73,16 @@ dotnet_naming_symbols.public_symbols.applicable_accessibilities = public
 dotnet_naming_rule.public_symbols_must_be_pascal_case.symbols = public_symbols
 dotnet_naming_rule.public_symbols_must_be_pascal_case.style = pascal_case_style
 dotnet_naming_rule.public_symbols_must_be_pascal_case.severity = error
+
+# Private consts should be camel case
+dotnet_naming_symbols.private_consts.applicable_kinds = struct, enum, property, field, event, delegate
+dotnet_naming_symbols.private_consts.applicable_accessibilities = private
+dotnet_naming_symbols.private_consts.required_modifiers = const
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+dotnet_naming_rule.private_consts_must_be_pascal_case.symbols = private_consts
+dotnet_naming_rule.private_consts_must_be_pascal_case.style = camel_case_style
+dotnet_naming_rule.private_consts_must_be_pascal_case.severity = error
 
 # Private symbols should be camel case and underscore prefixed
 dotnet_naming_symbols.private_symbols.applicable_kinds = struct, enum, property, field, event, delegate
