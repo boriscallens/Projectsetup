@@ -5,20 +5,22 @@ He will probably ignore them as he is still a moron
 
   - Authentication
   - Authorization
+  - Validation
   - Consistent logging pattern
   - Deployment pipeline up untill production
-  - Fake out *all* external dependencies on localhost
+  - Monitoring
+  - Fake *all* external dependencies on localhost by default
     - webservices
     - filesystems
     - repositories (db or otherwise)
 
-### Things you never do but are super important
+### Important things you never do
 
-  - List of nouns
   - Write out your scenarios to find your data and processes
+  - List of nouns (remember params parms parameters? yeah..)
 
 ### Minimize bikeshedding
 
   - .editorconfig / resharper rules
   - lint
-  - break builds for style errors (I know, it sucks)  
+  - break builds for style errors (I know, it sucks)
