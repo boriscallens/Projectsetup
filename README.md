@@ -1,7 +1,7 @@
 This is a list of notes to my future self.  
 He will probably ignore them as he is still a moron
 
-### Things you think can wait but don't
+### Things you think can wait but can't
 
   - Authentication
   - Authorization
