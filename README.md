@@ -15,10 +15,10 @@ He will probably ignore them as he is still a moron
 ### Things you never do but are super important
 
   - List of nouns
+  - Write out your scenarios to find your data and processes
 
 ### Minimize bikeshedding
 
   - .editorconfig / resharper rules
   - lint
-  - break builds for style errors (I know, it sucks)
-  
+  - break builds for style errors (I know, it sucks)  
