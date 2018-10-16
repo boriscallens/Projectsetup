@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Autofac;
+using Autofac.Core.Registration;
 using MediatR;
 using MediatR.Pipeline;
 using Projectsetup.Domain.Pipeline;
@@ -40,21 +41,26 @@ namespace Projectsetup.Infrastructure.Pipeline
                     .AsImplementedInterfaces();
             }
 
-            // It appears Autofac returns the last registered types first
             builder.RegisterGeneric(typeof(RequestLogger<>)).As(typeof(IRequestPreProcessor<>));
             builder.RegisterGeneric(typeof(RequestPostProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
             builder.RegisterGeneric(typeof(RequestPreProcessorBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            //builder.RegisterGeneric(typeof(GenericRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
-            //builder.RegisterGeneric(typeof(GenericPipelineBehavior<,>)).As(typeof(IPipelineBehavior<,>));
-            //builder.RegisterGeneric(typeof(ConstrainedRequestPostProcessor<,>)).As(typeof(IRequestPostProcessor<,>));
-            //builder.RegisterGeneric(typeof(ConstrainedPingedHandler<>)).As(typeof(INotificationHandler<>));
+            builder.Register(ResolveRequestHandlers);
+        }
 
-            builder.Register<ServiceFactory>(
-                ctx =>
+        private static ServiceFactory ResolveRequestHandlers(IComponentContext ctx)
+        {
+            var c = ctx.Resolve<IComponentContext>();
+            return t =>
+            {
+                try { return c.Resolve(t); }
+                catch (ComponentNotRegisteredException notRegisteredException)
                 {
-                    var c = ctx.Resolve<IComponentContext>();
-                    return t => c.Resolve(t);
-                });
+                    var requestTypeName = t.GenericTypeArguments[0].Name;
+                    var responseTypeName = t.GenericTypeArguments[1].Name;
+                    var msg = $"IRequestHandler<{requestTypeName}, {responseTypeName}>";
+                    throw new NotImplementedException(msg, notRegisteredException);
+                }
+            };
         }
     }
 }

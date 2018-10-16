@@ -28,5 +28,4 @@ namespace Projectsetup.Infrastructure
             builder.RegisterAssemblyTypes(markerType.GetTypeInfo().Assembly).AsImplementedInterfaces();
         }
     }
-
 }
