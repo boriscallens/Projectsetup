@@ -27,7 +27,10 @@ namespace Projectsetup.Test
             var missingValidationType = typeof(MissingValidationHandler);
 
             _logger = Substitute.For<ILogger>();
-            _mediatr = InitializeMediatr(missingAuthType, missingValidationType);
+            _mediatr = new MediatrBuilder()
+                .WithRequestMarkerTypes(missingAuthType, missingValidationType)
+                .WithInstance(_logger)
+                .Build();
         }
 
         [Fact]
@@ -47,7 +50,7 @@ namespace Projectsetup.Test
 
             Assert.NotNull(result.AuthenticationResult);
         }
-        
+
         [Fact]
         public async void FindValidatorForRequest()
         {
@@ -62,7 +65,9 @@ namespace Projectsetup.Test
         {
             var request = new MissingHandlerRequest();
             var exception = Assert.ThrowsAsync<InvalidOperationException>(async () => await _mediatr.Send(request));
-            Assert.Contains("IRequestHandler<MissingHandlerRequest, MissingHandlerResponse>", exception.Result.InnerException.Message);
+            Assert.Contains(
+                "IRequestHandler<MissingHandlerRequest, MissingHandlerResponse>",
+                exception.Result.InnerException.Message);
         }
 
         [Fact]
@@ -96,21 +101,22 @@ namespace Projectsetup.Test
             var request = new PingRequest();
             await _mediatr.Send(request);
 
-            _logger.Received().Info(Arg.Is<IPipelineRequest<IPipelineResponse>>(x => x.CorrelationId == request.CorrelationId));
+            _logger.Received().Info(
+                Arg.Is<IPipelineRequest<IPipelineResponse>>(x => x.CorrelationId == request.CorrelationId));
         }
 
-        private IMediator InitializeMediatr(params Type[] markerTypes)
-        {
-            var mediatrModule = new MediatrModule(markerTypes);
-            var log4NetModule = new Log4NetModule();
+        //private IMediator InitializeMediatr(params Type[] markerTypes)
+        //{
+        //    var mediatrModule = new MediatrModule(markerTypes);
+        //    var log4NetModule = new Log4NetModule();
 
-            var builder = AutofacConfig.GetBuilder();
-            builder.RegisterModule(mediatrModule);
-            builder.RegisterModule(log4NetModule);
-            builder.RegisterInstance(_logger).As<ILogger>();
+        //    var builder = AutofacConfig.GetBuilder();
+        //    builder.RegisterModule(mediatrModule);
+        //    builder.RegisterModule(log4NetModule);
+        //    builder.RegisterInstance(_logger).As<ILogger>();
 
-            var container = builder.Build();
-            return container.Resolve<IMediator>();
-        }
+        //    var container = builder.Build();
+        //    return container.Resolve<IMediator>();
+        //}
     }
 }
