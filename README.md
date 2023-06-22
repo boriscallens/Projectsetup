@@ -13,6 +13,7 @@ He will probably ignore them as he is still a moron
     - webservices
     - filesystems
     - repositories (db or otherwise)
+    - authorization
   - automate or document your dev environment setup
   - document your infrastructure
 
