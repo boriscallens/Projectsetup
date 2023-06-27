@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Boris Callens",
+  "classifications": [ "VerticalSlice", "BarelySliced", "Feature", "UnitTests" ],
+  "identity": "BarelySliced.Feature.Tests",
+  "name": "BarelySliced Feature Tests",
+  "shortName": "bsfeatureTests",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "sourceName": "FeatureName",
+  "preferNameDirectory": true,
+  "description": "Tests for a feature. Intended to be used with the rest of the BarelySliced templates.",
+  "symbols": {
+    "DefaultNamespace": {
+      "type": "bind",
+      "binding": "msbuild:RootNamespace",
+      "replaces": "%NAMESPACE%",
+      "defaultValue": "BarelySliced.Business.Tests.Features"
+    }
+  }
+}
