@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Boris Callens",
+  "classifications": [ "VerticalSlice", "BarelySliced", "Feature" ],
+  "identity": "BarelySliced.Feature",
+  "name": "BarelySliced Feature files",
+  "shortName": "bsfeature",
+  "tags": {
+    "language": "C#",
+    "type": "item"
+  },
+  "sourceName": "FeatureName",
+  "preferNameDirectory": true,
+  "description": "Feature files contains the request, response, handler for a single feature and it's ortagonal responsabilities like authorization. Intended to be used with the rest of the BarelySliced.VerticalSlice templates.",
+  "symbols": {
+    "DefaultNamespace": {
+      "type": "bind",
+      "binding": "msbuild:RootNamespace",
+      "replaces": "%NAMESPACE%",
+      "defaultValue": "BarelySliced.Business.Features"
+    }
+  }
+}

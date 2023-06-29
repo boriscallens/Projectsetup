@@ -93,6 +93,7 @@ dotnet sln "$solutionName.sln" add --solution-folder Tests `
 
 Write-Host "Adding nuget packages" -ForegroundColor Yellow
 dotnet add "$solutionName.Business/$solutionName.Business.csproj" package MediatR
+dotnet add "$solutionName.Business/$solutionName.Business.csproj" package FluentValidation
 
 dotnet add "$solutionName.Infrastructure/$solutionName.Infrastructure.csproj" package Microsoft.Extensions.DependencyInjection.Abstractions
 dotnet add "$solutionName.Infrastructure/$solutionName.Infrastructure.csproj" package MediatR
