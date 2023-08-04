@@ -29,5 +29,12 @@
       "type": "project-capability",
       "args": "CSharp"
     }
-  }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target":  "./Features/FeatureName/"
+    }
+  ]
+
 }

@@ -98,6 +98,11 @@ dotnet add "$solutionName.Business/$solutionName.Business.csproj" package Fluent
 dotnet add "$solutionName.Infrastructure/$solutionName.Infrastructure.csproj" package Microsoft.Extensions.DependencyInjection.Abstractions
 dotnet add "$solutionName.Infrastructure/$solutionName.Infrastructure.csproj" package MediatR
 
+dotnet restore $slnFilePath
+
+Write-Host "Adding feature scripts" -ForegroundColor Yellow
+Copy-Item -Path $originalLocation/addNewFeature.ps1 -Destination $folderPath
+
 Write-Host "Initializing git" -ForegroundColor Yellow
 git init
 git add .
@@ -105,3 +110,4 @@ git commit -m "Solution Setup"
 
 Set-Location $originalLocation
 Write-Host "Solution created successfully!" -ForegroundColor Green
+Write-Host "To add a new feature, run .\addNewFeature.ps1 from your solution root"  -ForegroundColor Green
