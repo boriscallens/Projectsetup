@@ -3,8 +3,12 @@
   "author": "Boris Callens",
   "classifications": [ "VerticalSlice", "BarelySliced", "Feature", "UnitTests" ],
   "identity": "BarelySliced.Feature.Tests",
+  "groupIdentity": "BarelySliced.Feature",
   "name": "BarelySliced Feature Tests",
   "shortName": "bsfeatureTests",
+  "precedence": "100",
+  "generatorVersions": "[1.0.0.0-*)",
+  "defaultName": "BarelySliced.Feature.Tests",
   "tags": {
     "language": "C#",
     "type": "item"
@@ -18,6 +22,12 @@
       "binding": "msbuild:RootNamespace",
       "replaces": "%NAMESPACE%",
       "defaultValue": "BarelySliced.Business.Tests.Features"
+    }
+  },
+  "constraints": {
+    "csharp-only": {
+      "type": "project-capability",
+      "args": "CSharp"
     }
   }
 }
