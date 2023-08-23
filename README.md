@@ -38,4 +38,5 @@ He will probably ignore them as he is still a moron
   - more then three private static functions are probably somebody else's responsibility
   - immutability loves you
   - labels are data
-  
+  - single responsability https://docs.google.com/presentation/d/1OWobMSIh4y6jJvCuZTKznJSgU0b3HkcDmWKXAZfTVGg/edit?usp=sharing
+  - scale horizontally 
